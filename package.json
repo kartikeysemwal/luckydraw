@@ -1,0 +1,25 @@
+{
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  },
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "name": "luckydraw",
+  "version": "1.0.0",
+  "description": "Lucky Draw application",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kartikeysemwal/luckydraw.git"
+  },
+  "author": "Kartikey Semwal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kartikeysemwal/luckydraw/issues"
+  },
+  "homepage": "https://github.com/kartikeysemwal/luckydraw#readme"
+}
