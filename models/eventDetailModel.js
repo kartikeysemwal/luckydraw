@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const ticketDetailSchema = mongoose.Schema(
+const eventDetailModel = mongoose.Schema(
     {
         date: {
             type: String,
@@ -21,6 +21,6 @@ const ticketDetailSchema = mongoose.Schema(
     }
 );
 
-const TicketDetail = mongoose.model("TicketDetail", ticketDetailSchema);
+const EventDetail = mongoose.model("EventDetail", eventDetailModel);
 
-module.exports = TicketDetail;
+module.exports = EventDetail;

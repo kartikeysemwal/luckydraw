@@ -11,10 +11,10 @@ const ticketSchema = mongoose.Schema(
             type: String,
             required: true,
         },
-        ticketDetail: {
+        eventDetail: {
             type: mongoose.Schema.Types.ObjectId,
             required: true,
-            ref: "TicketDetail",
+            ref: "EventDetail",
         },
     },
     {

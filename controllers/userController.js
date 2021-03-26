@@ -7,7 +7,7 @@ const {
 } = require("../utils/utilsFunction");
 const User = require("../models/userModel");
 const Ticket = require("../models/ticketModel");
-const TicketDetail = require("../models/ticketDetailModel");
+const eventDetailModel = require("../models/eventDetailModel");
 
 // @desc Register User
 // @route POST /api/users
@@ -82,26 +82,26 @@ const generateTicket = asyncHandler(async (req, res) => {
 
     date = formatDate(date);
 
-    var ticketDetail = await TicketDetail.findOne({ date });
+    var eventDetail = await eventDetailModel.findOne({ date });
 
-    if (!ticketDetail && !price) {
+    if (!eventDetail && !price) {
         res.status(400);
         throw new Error("Please enter price for this date");
     }
 
-    if (!ticketDetail) {
-        ticketDetail = await TicketDetail.create({ date, price });
+    if (!eventDetail) {
+        eventDetail = await eventDetailModel.create({ date, price });
     }
 
     for (var i = 0; i < qty; i++) {
         await Ticket.create({
             ticketNo: generateTicketNo(),
-            ticketDetail: ticketDetail._id,
+            eventDetail: eventDetail._id,
         });
     }
 
     res.status(201).json({
-        ticketDetail,
+        eventDetail,
     });
 });
 
