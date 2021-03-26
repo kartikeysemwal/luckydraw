@@ -1,13 +1,19 @@
 const asyncHandler = require("express-async-handler");
 const Ticket = require("../models/ticketModel");
+const { options } = require("../routes/ticketRoutes");
 
 // @desc GetAllTickets
 // @route GET /api/ticket/getalltickets
 // @access Public
 const getAllTickets = asyncHandler(async (req, res) => {
     const result = await Ticket.find({})
-        .populate("eventDetail", "_id price date")
+        .populate({
+            path: "eventDetail",
+            select: "_id price date dateFormat",
+            options: { sort: { dateFormat: -1 } },
+        })
         .select("user ticketNo");
+
     if (result) {
         res.json(result);
     } else {
