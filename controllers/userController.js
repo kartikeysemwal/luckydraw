@@ -4,10 +4,11 @@ const {
     isValidDate,
     formatDate,
     generateTicketNo,
+    formatJSDate,
 } = require("../utils/utilsFunction");
 const User = require("../models/userModel");
 const Ticket = require("../models/ticketModel");
-const eventDetailModel = require("../models/eventDetailModel");
+const EventDetail = require("../models/eventDetailModel");
 
 // @desc Register User
 // @route POST /api/users
@@ -82,7 +83,7 @@ const generateTicket = asyncHandler(async (req, res) => {
 
     date = formatDate(date);
 
-    var eventDetail = await eventDetailModel.findOne({ date });
+    var eventDetail = await EventDetail.findOne({ date });
 
     if (!eventDetail && !price) {
         res.status(400);
@@ -90,7 +91,7 @@ const generateTicket = asyncHandler(async (req, res) => {
     }
 
     if (!eventDetail) {
-        eventDetail = await eventDetailModel.create({
+        eventDetail = await EventDetail.create({
             date,
             price,
             dateFormat: new Date(date),
@@ -125,8 +126,13 @@ const bookTicket = asyncHandler(async (req, res) => {
         throw new Error("Ticket by this id not found");
     }
 
+    if (ticket.user.equals(req.user._id)) {
+        res.status(400);
+        throw new Error("This is ticket is already bought by you");
+    }
+
     if (ticket.user != null) {
-        res.status(404);
+        res.status(400);
         throw new Error("This ticket is already booked");
     }
 
@@ -147,9 +153,50 @@ const bookTicket = asyncHandler(async (req, res) => {
     res.status(200).json(ticket);
 });
 
+// @desc Find winner
+// @route GET /api/user/findwinner
+// @access Protect and admin
+const findWinner = asyncHandler(async (req, res) => {
+    const cur_date = formatJSDate(new Date());
+
+    const event = await EventDetail.findOne({ date: cur_date });
+
+    if (!event) {
+        res.status(404);
+        throw new Error("No event present for today");
+    }
+
+    const count = await Ticket.find({
+        eventDetail: event._id,
+        user: { $ne: null },
+    }).countDocuments();
+
+    if (count == 0) {
+        res.status(404);
+        throw new Error("No ticket bought for this event");
+    }
+
+    var random = Math.floor(Math.random() * count);
+
+    const ticket = await Ticket.findOne({
+        eventDetail: event._id,
+        user: { $ne: null },
+    }).skip(random);
+
+    event.winner = ticket.user;
+
+    await event.save();
+
+    res.status(200).json({
+        event,
+        ticket,
+    });
+});
+
 module.exports = {
     registerUser,
     authUser,
     generateTicket,
     bookTicket,
+    findWinner,
 };

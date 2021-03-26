@@ -39,8 +39,26 @@ const formatDate = (dateString) => {
     return `${month}/${day}/${year}`;
 };
 
+const formatJSDate = (date) => {
+    var year = date.getFullYear();
+
+    var month = (1 + date.getMonth()).toString();
+    month = month.length > 1 ? month : "0" + month;
+
+    var day = date.getDate().toString();
+    day = day.length > 1 ? day : "0" + day;
+
+    return month + "/" + day + "/" + year;
+};
+
 const generateTicketNo = () => {
     return ("" + Math.random()).substring(2, 12);
 };
 
-module.exports = { generateToken, isValidDate, formatDate, generateTicketNo };
+module.exports = {
+    generateToken,
+    isValidDate,
+    formatDate,
+    generateTicketNo,
+    formatJSDate,
+};
