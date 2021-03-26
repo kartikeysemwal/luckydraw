@@ -15,6 +15,10 @@ const eventDetailModel = mongoose.Schema(
             default: null,
             ref: "User",
         },
+        dateFormat: {
+            type: Date,
+            required: true,
+        },
     },
     {
         timestamps: true,

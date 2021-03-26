@@ -90,7 +90,11 @@ const generateTicket = asyncHandler(async (req, res) => {
     }
 
     if (!eventDetail) {
-        eventDetail = await eventDetailModel.create({ date, price });
+        eventDetail = await eventDetailModel.create({
+            date,
+            price,
+            dateFormat: new Date(date),
+        });
     }
 
     for (var i = 0; i < qty; i++) {
@@ -105,8 +109,47 @@ const generateTicket = asyncHandler(async (req, res) => {
     });
 });
 
+// @desc Book ticket
+// @route POST /api/users/bookticket/:tickedId
+// @access Protect user
+const bookTicket = asyncHandler(async (req, res) => {
+    const ticketId = req.params.ticketId;
+
+    const ticket = await Ticket.findById(ticketId).populate(
+        "eventDetail",
+        "_id price date"
+    );
+
+    if (!ticket) {
+        res.status(404);
+        throw new Error("Ticket by this id not found");
+    }
+
+    if (ticket.user != null) {
+        res.status(404);
+        throw new Error("This ticket is already booked");
+    }
+
+    const alreadyBooked = await Ticket.findOne({
+        eventDetail: ticket.eventDetail._id,
+        user: req.user._id,
+    });
+
+    if (alreadyBooked) {
+        res.status(400);
+        throw new Error("You have already booked ticket for this date");
+    }
+
+    ticket.user = req.user._id;
+
+    await ticket.save();
+
+    res.status(200).json(ticket);
+});
+
 module.exports = {
     registerUser,
     authUser,
     generateTicket,
+    bookTicket,
 };
