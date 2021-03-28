@@ -1,6 +1,7 @@
 # Lucky Draw
 
 This is a MERN stack project based on the concept of Lucky Draw
+Link to live project [https://luckydrawproject.herokuapp.com/](https://luckydrawproject.herokuapp.com/)
 
 ## Features
 
