@@ -78,6 +78,15 @@ const Header = () => {
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
+            <Container>
+                <h5 className="text-center py-3">
+                    Welcome to the lucky draw. Winner will be announced everyday
+                    at 8:00 am
+                </h5>
+                <h5 className="text-center">
+                    You can book ticket till 7:00 am before the event
+                </h5>
+            </Container>
         </header>
     );
 };

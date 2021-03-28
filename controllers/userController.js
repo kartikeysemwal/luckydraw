@@ -118,8 +118,25 @@ const bookTicket = asyncHandler(async (req, res) => {
 
     const ticket = await Ticket.findById(ticketId).populate(
         "eventDetail",
-        "_id price date"
+        "_id price date dateFormat"
     );
+
+    // Check time of booking
+
+    console.log(ticket.eventDetail.dateFormat, " - ", new Date());
+    var diff = ticket.eventDetail.dateFormat - new Date();
+
+    // diff = diff / 1000; // For seconds
+    // console.log(diff, " in seconds");
+    // diff = diff / 60; // For minutes
+    // console.log(diff, " in minutes");
+    // diff = diff / 60; //For hours
+    // console.log(diff, " in hours");
+
+    if (diff <= 0) {
+        res.status(400);
+        throw new Error("This is an old event");
+    }
 
     if (!ticket) {
         res.status(404);
@@ -140,6 +157,13 @@ const bookTicket = asyncHandler(async (req, res) => {
         eventDetail: ticket.eventDetail._id,
         user: req.user._id,
     });
+
+    if (diff < 1) {
+        res.status(400);
+        throw new Error(
+            "Ticket booking is only valid till 7:00 am. Please try in next event."
+        );
+    }
 
     if (alreadyBooked) {
         res.status(400);
@@ -202,7 +226,9 @@ const findWinner = asyncHandler(async (req, res) => {
 // @route Get /api/users/mytickets
 // @access Protected
 const myTickets = asyncHandler(async (req, res) => {
-    const tickets = await Ticket.find({ user: req.user._id });
+    const tickets = await Ticket.find({ user: req.user._id }).populate(
+        "eventDetail"
+    );
     res.status(200).json(tickets);
 });
 

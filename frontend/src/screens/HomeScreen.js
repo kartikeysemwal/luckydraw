@@ -12,6 +12,9 @@ const HomeScreen = ({}) => {
     const ticketList = useSelector((state) => state.ticketList);
     const { loading, tickets, error } = ticketList;
 
+    const userLogin = useSelector((state) => state.userLogin);
+    const { userInfo } = userLogin;
+
     useEffect(() => {
         dispatch(listTickets());
     }, [dispatch]);
@@ -49,7 +52,11 @@ const HomeScreen = ({}) => {
                                 </td>
                                 <td>
                                     <LinkContainer
-                                        to={`/bookTicket/${ticket._id}`}
+                                        to={
+                                            userInfo != null
+                                                ? `/bookTicket/${ticket._id}`
+                                                : `/login`
+                                        }
                                     >
                                         <Button
                                             variant="light"

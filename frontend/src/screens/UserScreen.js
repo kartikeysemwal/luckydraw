@@ -39,19 +39,6 @@ const UserScreen = ({}) => {
                                 <td>{ticket.ticketNo}</td>
                                 <td>{ticket.eventDetail.date}</td>
                                 <td>{ticket.eventDetail.price}</td>
-                                <td>
-                                    <LinkContainer
-                                        to={`/bookTicket/${ticket._id}`}
-                                    >
-                                        <Button
-                                            variant="light"
-                                            className="btn-sm"
-                                            disabled={ticket.user != null}
-                                        >
-                                            Book Ticket
-                                        </Button>
-                                    </LinkContainer>
-                                </td>
                             </tr>
                         ))}
                     </tbody>
