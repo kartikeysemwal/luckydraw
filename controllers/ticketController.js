@@ -3,14 +3,13 @@ const Ticket = require("../models/ticketModel");
 const { options } = require("../routes/ticketRoutes");
 
 // @desc GetAllTickets
-// @route GET /api/ticket/getalltickets
+// @route GET /api/tickets/alltickets
 // @access Public
 const getAllTickets = asyncHandler(async (req, res) => {
     const result = await Ticket.find({})
         .populate({
             path: "eventDetail",
             select: "_id price date dateFormat",
-            options: { sort: { dateFormat: -1 } },
         })
         .select("user ticketNo");
 
@@ -23,7 +22,7 @@ const getAllTickets = asyncHandler(async (req, res) => {
 });
 
 // @desc Get all unassigned tickets
-// @route GET /api/ticket/getavailabletickets
+// @route GET /api/ticket/availabletickets
 // @access Public
 const getAvailableTickets = asyncHandler(async (req, res) => {
     const result = await Ticket.find({ user: null })
@@ -38,7 +37,7 @@ const getAvailableTickets = asyncHandler(async (req, res) => {
 });
 
 // @desc Get booked tickets
-// @route GET /api/ticket/getbookedtickets
+// @route GET /api/ticket/bookedtickets
 // @access Public
 const getBookedTickets = asyncHandler(async (req, res) => {
     const result = await Ticket.find({ user: { $ne: null } })
