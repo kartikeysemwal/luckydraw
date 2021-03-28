@@ -8,8 +8,8 @@ const {
     getLastSevenWinners,
 } = require("../controllers/eventDetailController");
 
-router.get("/getallevents", getAllEvents);
-router.get("/getallfutureevents", getAllFutureEvents);
-router.get("/getlastsevenwinners", getLastSevenWinners);
+router.get("/allevents", getAllEvents);
+router.get("/allfutureevents", getAllFutureEvents);
+router.get("/lastsevenwinners", getLastSevenWinners);
 
 module.exports = router;

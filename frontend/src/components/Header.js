@@ -27,10 +27,10 @@ const Header = () => {
                         <Nav className="ml-auto">
                             {userInfo ? (
                                 <>
-                                    <LinkContainer to="/">
+                                    <LinkContainer to="/mytickets">
                                         <Nav.Link>
                                             <i className="fas fa-shopping-cart"></i>{" "}
-                                            Your Tickets
+                                            My Tickets
                                         </Nav.Link>
                                     </LinkContainer>
                                     <NavDropdown

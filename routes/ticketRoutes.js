@@ -8,8 +8,8 @@ const {
     getBookedTickets,
 } = require("../controllers/ticketController");
 
-router.get("/getalltickets", getAllTickets);
-router.get("/getavailabletickets", getAvailableTickets);
-router.get("/getbookedtickets", getBookedTickets);
+router.get("/alltickets", getAllTickets);
+router.get("/availabletickets", getAvailableTickets);
+router.get("/bookedtickets", getBookedTickets);
 
 module.exports = router;

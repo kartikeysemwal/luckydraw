@@ -9,6 +9,8 @@ import {
     USER_REGISTER_FAIL,
 } from "../constants/userConstants";
 
+import { USER_TICKET_LIST_RESET } from "../constants/ticketConstants";
+
 export const login = (email, password) => async (dispatch) => {
     try {
         dispatch({
@@ -47,6 +49,7 @@ export const login = (email, password) => async (dispatch) => {
 export const logout = () => (dispatch) => {
     localStorage.removeItem("userInfo");
     dispatch({ type: USER_LOGOUT });
+    dispatch({ type: USER_TICKET_LIST_RESET });
 };
 
 export const register = (name, email, password) => async (dispatch) => {

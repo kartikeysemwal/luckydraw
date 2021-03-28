@@ -6,6 +6,7 @@ import Footer from "./components/Footer";
 import HomeScreen from "./screens/HomeScreen";
 import LoginScreen from "./screens/LoginScreen";
 import BookScreen from "./screens/BookScreen";
+import UserScreen from "./screens/UserScreen";
 
 function App() {
     return (
@@ -18,6 +19,7 @@ function App() {
                         path="/bookticket/:ticketId"
                         component={BookScreen}
                     />
+                    <Route path="/mytickets" component={UserScreen} />
                     <Route path="/" component={HomeScreen} exact />
                 </Container>
             </main>

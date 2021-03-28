@@ -193,10 +193,19 @@ const findWinner = asyncHandler(async (req, res) => {
     });
 });
 
+// @desc Get tickets booked by user
+// @route Get /api/users/mytickets
+// @access Protected
+const myTickets = asyncHandler(async (req, res) => {
+    const tickets = await Ticket.find({ user: req.user._id });
+    res.status(200).json(tickets);
+});
+
 module.exports = {
     registerUser,
     authUser,
     generateTicket,
     bookTicket,
     findWinner,
+    myTickets,
 };
