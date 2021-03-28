@@ -115,8 +115,6 @@ export const eventGenerate = (date, price, qty) => async (
     try {
         dispatch({ type: EVENT_GENERATE_REQUEST });
 
-        console.log(date, price, qty);
-
         const {
             userLogin: { userInfo },
         } = getState();

@@ -37,8 +37,16 @@ const HomeScreen = ({}) => {
                         {tickets.map((ticket) => (
                             <tr key={ticket._id}>
                                 <td>{ticket.ticketNo}</td>
-                                <td>{ticket.eventDetail.date}</td>
-                                <td>{ticket.eventDetail.price}</td>
+                                <td>
+                                    {ticket.eventDetail != null
+                                        ? ticket.eventDetail.date
+                                        : "null"}
+                                </td>
+                                <td>
+                                    {ticket.eventDetail != null
+                                        ? ticket.eventDetail.price
+                                        : "null"}
+                                </td>
                                 <td>
                                     <LinkContainer
                                         to={`/bookTicket/${ticket._id}`}

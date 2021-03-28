@@ -40,8 +40,8 @@ const EventGenerateScreen = ({ location, history }) => {
                 tickets will be generated
             </h5>
             <h5>
-                If event not present, date and price is mandatory, qty is set as
-                10 for default
+                If event not present, date and price is mandatory, qty is
+                default 0
             </h5>
             {error && <Message variant="danger">{error}</Message>}
             {loading && <Loader />}

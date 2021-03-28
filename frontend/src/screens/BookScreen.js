@@ -24,7 +24,9 @@ const BookScreen = ({ match }) => {
             ) : error ? (
                 <Message variant="danger">{error}</Message>
             ) : (
-                <Message variant="success">{error}</Message>
+                <Message variant="success">
+                    {"You have successfully bought the ticket"}
+                </Message>
             )}
         </>
     );

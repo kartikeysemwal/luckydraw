@@ -69,7 +69,7 @@ const authUser = asyncHandler(async (req, res) => {
 // @route POST /api/users/generateevent
 // @access Admin only
 const generateEvent = asyncHandler(async (req, res) => {
-    var { date, price, qty = 10 } = req.body;
+    var { date, price, qty } = req.body;
 
     if (!date) {
         res.status(400);
