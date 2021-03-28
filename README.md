@@ -73,3 +73,31 @@ npm run dev
 # Run backend only
 npm run server
 ```
+
+## Different Navbars
+
+### Normal Navbar
+![Normal Navbar](/images/navbar1.png)
+
+### User SignedIn Navbar
+![User SignedIn Navbar](/images/navbar2.png)
+
+### Admin SignedIn Navbar
+![Admin SignedIn Navbar](/images/navbar3.png)
+
+## Different Screens
+
+### Main Screen
+![Main Screen](/images/main_screen.png)
+
+### Winners Screen
+![Winners Screen](/images/winners_screen.png)
+
+### SignIn Screen
+![SignIn Screen](/images/signin_screen.png)
+
+### Register Screen
+![Register Screen](/images/signup_screen.png)
+
+### User MyTickets Screen
+![User MyTickets Screen](/images/mytickets_screen.png)
