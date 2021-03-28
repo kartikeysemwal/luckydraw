@@ -126,7 +126,7 @@ const bookTicket = asyncHandler(async (req, res) => {
         throw new Error("Ticket by this id not found");
     }
 
-    if (ticket.user.equals(req.user._id)) {
+    if (ticket.user != null && ticket.user.equals(req.user._id)) {
         res.status(400);
         throw new Error("This is ticket is already bought by you");
     }

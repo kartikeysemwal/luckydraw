@@ -41,7 +41,7 @@ const HomeScreen = ({}) => {
                                 <td>{ticket.eventDetail.price}</td>
                                 <td>
                                     <LinkContainer
-                                        to={`/api/users/bookTicket/${ticket._id}`}
+                                        to={`/bookTicket/${ticket._id}`}
                                     >
                                         <Button
                                             variant="light"

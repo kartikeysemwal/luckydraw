@@ -25,21 +25,25 @@ const Header = () => {
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="ml-auto">
-                            <LinkContainer to="/">
-                                <Nav.Link>
-                                    <i className="fas fa-shopping-cart"></i>{" "}
-                                    Your Tickets
-                                </Nav.Link>
-                            </LinkContainer>
                             {userInfo ? (
-                                <NavDropdown
-                                    title={userInfo.name}
-                                    id="username"
-                                >
-                                    <NavDropdown.Item onClick={logoutHandler}>
-                                        Logout
-                                    </NavDropdown.Item>
-                                </NavDropdown>
+                                <>
+                                    <LinkContainer to="/">
+                                        <Nav.Link>
+                                            <i className="fas fa-shopping-cart"></i>{" "}
+                                            Your Tickets
+                                        </Nav.Link>
+                                    </LinkContainer>
+                                    <NavDropdown
+                                        title={userInfo.name}
+                                        id="username"
+                                    >
+                                        <NavDropdown.Item
+                                            onClick={logoutHandler}
+                                        >
+                                            Logout
+                                        </NavDropdown.Item>
+                                    </NavDropdown>
+                                </>
                             ) : (
                                 <LinkContainer to="/login">
                                     <Nav.Link>

@@ -3,6 +3,9 @@ import {
     TICKET_LIST_REQUEST,
     TICKET_LIST_SUCCESS,
     TICKET_LIST_FAIL,
+    TICKET_BOOK_REQUEST,
+    TICKET_BOOK_SUCCESS,
+    TICKET_BOOK_FAIL,
 } from "../constants/ticketConstants";
 
 export const listTickets = () => async (dispatch) => {
@@ -18,6 +21,40 @@ export const listTickets = () => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: TICKET_LIST_FAIL,
+            payload:
+                error.response && error.response.data.message
+                    ? error.response.data.message
+                    : error.message,
+        });
+    }
+};
+
+export const bookTicket = (ticketId) => async (dispatch, getState) => {
+    try {
+        dispatch({ type: TICKET_BOOK_REQUEST });
+
+        const {
+            userLogin: { userInfo },
+        } = getState();
+
+        const config = {
+            headers: {
+                Authorization: `Bearer ${userInfo.token}`,
+            },
+        };
+
+        const { data } = await axios.get(
+            `/api/users/bookticket/${ticketId}`,
+            config
+        );
+
+        dispatch({
+            type: TICKET_BOOK_SUCCESS,
+            payload: data,
+        });
+    } catch (error) {
+        dispatch({
+            type: TICKET_BOOK_FAIL,
             payload:
                 error.response && error.response.data.message
                     ? error.response.data.message
