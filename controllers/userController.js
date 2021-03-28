@@ -23,6 +23,11 @@ const registerUser = asyncHandler(async (req, res) => {
         throw new Error("User already exists");
     }
 
+    if (password.length < 6) {
+        res.status(400);
+        throw new Error("Password should be atleast of 6 characters");
+    }
+
     const user = await User.create({
         name,
         email,
@@ -83,6 +88,20 @@ const generateEvent = asyncHandler(async (req, res) => {
 
     date = formatDate(date);
 
+    var diff = new Date(date) - new Date();
+
+    // diff = diff / 1000; // For seconds
+    // console.log(diff, " in seconds");
+    // diff = diff / 60; // For minutes
+    // console.log(diff, " in minutes");
+    // diff = diff / 60; //For hours
+    // console.log(diff, " in hours");
+
+    if (diff <= 0) {
+        res.status(400);
+        throw new Error("Event cannot be created for past dates");
+    }
+
     var eventDetail = await EventDetail.findOne({ date });
 
     if (!eventDetail && !price) {
@@ -123,7 +142,6 @@ const bookTicket = asyncHandler(async (req, res) => {
 
     // Check time of booking
 
-    console.log(ticket.eventDetail.dateFormat, " - ", new Date());
     var diff = ticket.eventDetail.dateFormat - new Date();
 
     // diff = diff / 1000; // For seconds

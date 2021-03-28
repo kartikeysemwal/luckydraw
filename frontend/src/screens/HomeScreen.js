@@ -59,7 +59,11 @@ const HomeScreen = ({}) => {
                                         }
                                     >
                                         <Button
-                                            variant="light"
+                                            variant={
+                                                ticket.user != null
+                                                    ? "danger"
+                                                    : "dark"
+                                            }
                                             className="btn-sm"
                                             disabled={ticket.user != null}
                                         >
