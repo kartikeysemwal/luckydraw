@@ -28,6 +28,19 @@ The detail description of all API endpoints
 | Get | /api/users/bookticket/:ticketId | Route for booking a ticket |
 | Get | /api/users/mytickets | Route for getting all booked ticket by current user |
 
+## API Endpoints for Tickets
+| Type  | URL | Endpoint |
+| ------------- | ------------- | ------------- |
+| Get | /api/tickets/alltickets | Get all tickets |
+| Get | /api/tickets/availabletickets | Get all available tickets |
+| Get | /api/tickets/bookedtickets | Get all booked tickets | 
+
+## API Endpoints for Events
+| Type  | URL | Endpoint |
+| ------------- | ------------- | ------------- |
+| Get | /api/events/allevents | Get all events |
+| Get | /api/events/futureevents | Get all future events |
+| Get | /api/events/lastwinners | Get all last winners in one week |
 
 
 ## Usage
