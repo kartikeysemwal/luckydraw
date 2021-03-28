@@ -12,6 +12,8 @@ import {
     eventListReducer,
     eventFutureListReducer,
     eventWinnerListReducer,
+    eventFindWinnerReducer,
+    eventGenerateReducer,
 } from "./reducers/eventReducers";
 
 const reducer = combineReducers({
@@ -23,6 +25,8 @@ const reducer = combineReducers({
     eventList: eventListReducer,
     eventFutureList: eventFutureListReducer,
     eventWinnerList: eventWinnerListReducer,
+    eventFindWinner: eventFindWinnerReducer,
+    eventGenerate: eventGenerateReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")

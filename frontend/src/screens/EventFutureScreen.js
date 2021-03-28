@@ -9,8 +9,8 @@ import { listAllFutureEvents } from "../actions/eventActions";
 const EventFutureScreen = ({}) => {
     const dispatch = useDispatch();
 
-    const eventList = useSelector((state) => state.eventList);
-    const { loading, events, error } = eventList;
+    const eventFutureList = useSelector((state) => state.eventFutureList);
+    const { loading, events, error } = eventFutureList;
 
     useEffect(() => {
         dispatch(listAllFutureEvents());

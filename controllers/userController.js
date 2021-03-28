@@ -66,9 +66,9 @@ const authUser = asyncHandler(async (req, res) => {
 });
 
 // @desc Protect and admin
-// @route POST /api/users/generateticket
+// @route POST /api/users/generateevent
 // @access Admin only
-const generateTicket = asyncHandler(async (req, res) => {
+const generateEvent = asyncHandler(async (req, res) => {
     var { date, price, qty = 10 } = req.body;
 
     if (!date) {
@@ -166,6 +166,11 @@ const findWinner = asyncHandler(async (req, res) => {
         throw new Error("No event present for today");
     }
 
+    if (event.winner != null) {
+        res.status(400);
+        throw new Error("Winner is already declared");
+    }
+
     const count = await Ticket.find({
         eventDetail: event._id,
         user: { $ne: null },
@@ -204,7 +209,7 @@ const myTickets = asyncHandler(async (req, res) => {
 module.exports = {
     registerUser,
     authUser,
-    generateTicket,
+    generateEvent,
     bookTicket,
     findWinner,
     myTickets,

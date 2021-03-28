@@ -9,6 +9,12 @@ import {
     EVENT_WINNER_LIST_REQUEST,
     EVENT_WINNER_LIST_SUCCESS,
     EVENT_WINNER_LIST_FAIL,
+    EVENT_FIND_WINNER_REQUEST,
+    EVENT_FIND_WINNER_SUCCESS,
+    EVENT_FIND_WINNER_FAIL,
+    EVENT_GENERATE_REQUEST,
+    EVENT_GENERATE_SUCCESS,
+    EVENT_GENERATE_FAIL,
 } from "../constants/eventConstants";
 
 export const listAllEvents = () => async (dispatch) => {
@@ -16,8 +22,6 @@ export const listAllEvents = () => async (dispatch) => {
         dispatch({ type: EVENT_LIST_REQUEST });
 
         const { data } = await axios.get("/api/events/allevents");
-
-        console.log(data);
 
         dispatch({
             type: EVENT_LIST_SUCCESS,
@@ -68,6 +72,75 @@ export const listWinners = () => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: EVENT_WINNER_LIST_FAIL,
+            payload:
+                error.response && error.response.data.message
+                    ? error.response.data.message
+                    : error.message,
+        });
+    }
+};
+
+export const findWinner = () => async (dispatch, getState) => {
+    try {
+        dispatch({ type: EVENT_FIND_WINNER_REQUEST });
+
+        const {
+            userLogin: { userInfo },
+        } = getState();
+
+        const config = {
+            headers: {
+                Authorization: `Bearer ${userInfo.token}`,
+            },
+        };
+
+        const { data } = await axios.get("/api/users/findwinner", config);
+
+        dispatch({ type: EVENT_FIND_WINNER_SUCCESS });
+    } catch (error) {
+        dispatch({
+            type: EVENT_FIND_WINNER_FAIL,
+            payload:
+                error.response && error.response.data.message
+                    ? error.response.data.message
+                    : error.message,
+        });
+    }
+};
+
+export const eventGenerate = (date, price, qty) => async (
+    dispatch,
+    getState
+) => {
+    try {
+        dispatch({ type: EVENT_GENERATE_REQUEST });
+
+        console.log(date, price, qty);
+
+        const {
+            userLogin: { userInfo },
+        } = getState();
+
+        const config = {
+            headers: {
+                Authorization: `Bearer ${userInfo.token}`,
+                "Content-Type": "application/json",
+            },
+        };
+
+        const { data } = await axios.post(
+            `/api/users/generateevent`,
+            { date, price, qty },
+            config
+        );
+
+        dispatch({
+            type: EVENT_GENERATE_SUCCESS,
+            payload: data,
+        });
+    } catch (error) {
+        dispatch({
+            type: EVENT_GENERATE_FAIL,
             payload:
                 error.response && error.response.data.message
                     ? error.response.data.message

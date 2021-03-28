@@ -10,6 +10,8 @@ import UserScreen from "./screens/UserScreen";
 import EventScreen from "./screens/EventScreen";
 import EventFutureScreen from "./screens/EventFutureScreen";
 import EventWinnerScreen from "./screens/EventWinnerScreen";
+import EventFindWinnerScreen from "./screens/EventFindWinnerScreen";
+import EventGenerateScreen from "./screens/EventGenerateScreen";
 
 function App() {
     return (
@@ -26,6 +28,14 @@ function App() {
                     <Route path="/allevents" component={EventScreen} />
                     <Route path="/futureevents" component={EventFutureScreen} />
                     <Route path="/lastwinners" component={EventWinnerScreen} />
+                    <Route
+                        path="/admin/findwinner"
+                        component={EventFindWinnerScreen}
+                    />
+                    <Route
+                        path="/admin/generateevent"
+                        component={EventGenerateScreen}
+                    />
                     <Route path="/" component={HomeScreen} exact />
                 </Container>
             </main>

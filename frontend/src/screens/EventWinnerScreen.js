@@ -9,8 +9,8 @@ import { listWinners } from "../actions/eventActions";
 const EventFutureScreen = ({}) => {
     const dispatch = useDispatch();
 
-    const eventList = useSelector((state) => state.eventList);
-    const { loading, events, error } = eventList;
+    const eventWinnerList = useSelector((state) => state.eventWinnerList);
+    const { loading, events, error } = eventWinnerList;
 
     useEffect(() => {
         dispatch(listWinners());
