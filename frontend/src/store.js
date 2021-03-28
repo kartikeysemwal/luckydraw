@@ -8,6 +8,11 @@ import {
     ticketBookReducer,
     userTicketListReducer,
 } from "./reducers/ticketReducers";
+import {
+    eventListReducer,
+    eventFutureListReducer,
+    eventWinnerListReducer,
+} from "./reducers/eventReducers";
 
 const reducer = combineReducers({
     userLogin: userLoginReducer,
@@ -15,6 +20,9 @@ const reducer = combineReducers({
     ticketList: ticketListReducer,
     ticketBook: ticketBookReducer,
     userTicketList: userTicketListReducer,
+    eventList: eventListReducer,
+    eventFutureList: eventFutureListReducer,
+    eventWinnerList: eventWinnerListReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")

@@ -7,6 +7,9 @@ import HomeScreen from "./screens/HomeScreen";
 import LoginScreen from "./screens/LoginScreen";
 import BookScreen from "./screens/BookScreen";
 import UserScreen from "./screens/UserScreen";
+import EventScreen from "./screens/EventScreen";
+import EventFutureScreen from "./screens/EventFutureScreen";
+import EventWinnerScreen from "./screens/EventWinnerScreen";
 
 function App() {
     return (
@@ -20,6 +23,9 @@ function App() {
                         component={BookScreen}
                     />
                     <Route path="/mytickets" component={UserScreen} />
+                    <Route path="/allevents" component={EventScreen} />
+                    <Route path="/futureevents" component={EventFutureScreen} />
+                    <Route path="/lastwinners" component={EventWinnerScreen} />
                     <Route path="/" component={HomeScreen} exact />
                 </Container>
             </main>

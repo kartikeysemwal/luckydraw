@@ -22,6 +22,15 @@ const Header = () => {
                     <LinkContainer to="/">
                         <Navbar.Brand>Lucky Draw</Navbar.Brand>
                     </LinkContainer>
+                    <LinkContainer to="/allevents">
+                        <Navbar.Brand>All Events</Navbar.Brand>
+                    </LinkContainer>
+                    <LinkContainer to="/futureevents">
+                        <Navbar.Brand>Future Events</Navbar.Brand>
+                    </LinkContainer>
+                    <LinkContainer to="/lastwinners">
+                        <Navbar.Brand>Winners</Navbar.Brand>
+                    </LinkContainer>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="ml-auto">

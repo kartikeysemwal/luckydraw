@@ -5,11 +5,11 @@ const router = express.Router();
 const {
     getAllEvents,
     getAllFutureEvents,
-    getLastSevenWinners,
+    getLastWinners,
 } = require("../controllers/eventDetailController");
 
 router.get("/allevents", getAllEvents);
-router.get("/allfutureevents", getAllFutureEvents);
-router.get("/lastsevenwinners", getLastSevenWinners);
+router.get("/futureevents", getAllFutureEvents);
+router.get("/lastwinners", getLastWinners);
 
 module.exports = router;

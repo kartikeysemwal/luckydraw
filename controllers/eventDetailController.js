@@ -2,10 +2,10 @@ const asyncHandler = require("express-async-handler");
 const EventDetail = require("../models/eventDetailModel");
 
 // @desc Get all events
-// @route GET /api/events/getallevents
+// @route GET /api/events/allevents
 // @access Public
 const getAllEvents = asyncHandler(async (req, res) => {
-    const result = await EventDetail.find({});
+    const result = await EventDetail.find({}).populate("winner", "name");
     if (result) {
         res.json(result);
     } else {
@@ -15,7 +15,7 @@ const getAllEvents = asyncHandler(async (req, res) => {
 });
 
 // @desc Get all future events
-// @route GET /api/events/getallfutureevents
+// @route GET /api/events/futureevents
 // @access Public
 const getAllFutureEvents = asyncHandler(async (req, res) => {
     const result = await EventDetail.find({
@@ -29,12 +29,14 @@ const getAllFutureEvents = asyncHandler(async (req, res) => {
     }
 });
 
-//@desc Get events of last seven days
-//@route GET /api/events/getlastsevenwinners
+//@desc Get events of last winner
+//@route GET /api/events/lastwinners
 //@access Public
-const getLastSevenWinners = asyncHandler(async (req, res) => {
+const getLastWinners = asyncHandler(async (req, res) => {
+    var days = 7; // Last sevent days
+
     var date = new Date();
-    date.setDate(date.getDate() - 7); // Last seven days
+    date.setDate(date.getDate() - days);
 
     date = new Date(date);
 
@@ -50,4 +52,4 @@ const getLastSevenWinners = asyncHandler(async (req, res) => {
     }
 });
 
-module.exports = { getAllEvents, getAllFutureEvents, getLastSevenWinners };
+module.exports = { getAllEvents, getAllFutureEvents, getLastWinners };
