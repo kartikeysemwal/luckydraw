@@ -2,6 +2,8 @@
 
 This is a MERN stack project based on the concept of Lucky Draw
 
+Link to live project [https://luckydrawproject.herokuapp.com/](https://luckydrawproject.herokuapp.com/)
+
 ## Features
 
 - User Login and Registration
@@ -16,7 +18,7 @@ The project is divided in three sections at every place
 - Tickets
 - Users
 
-The detail description of all API endpoints 
+The detail description of all API endpoints [https://documenter.getpostman.com/view/11040481/TzCL7nf8](https://documenter.getpostman.com/view/11040481/TzCL7nf8)
 
 ## API Endpoints for User
 | Type  | URL | Endpoint |
