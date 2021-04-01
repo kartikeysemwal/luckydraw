@@ -21,6 +21,10 @@ const userSchema = mongoose.Schema(
             required: true,
             default: false,
         },
+        rewardCount: {
+            type: Number,
+            default: 0,
+        },
     },
     {
         timestamps: true,

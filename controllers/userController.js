@@ -238,6 +238,50 @@ const findWinner = asyncHandler(async (req, res) => {
         event,
         ticket,
     });
+
+    // For two winners
+
+    /*
+
+    const users = await Ticket.find({
+        eventDetail: event._id,
+        user: { $ne: null },
+    }).select("user");
+
+    const size = users.length;
+
+    if (size == 0) {
+        res.status(404);
+        throw new Error("No ticket bought for this event");
+    }
+
+    var random1 = Math.floor(Math.random() * size);
+
+    // const ticket1 = await Ticket.findOne({
+    //     eventDetail: event._id,
+    //     user: { $ne: null },
+    // }).skip(random);
+
+    event.winner = users[random1].user;
+    await event.save();
+
+    const winner1 = users[random1].user;
+
+    if (size == 1) {
+        console.log(winner1);
+        res.status(200).json({
+            event,
+            // ticket,
+        });
+    } else {
+        var random2 = Math.floor(Math.random() * size);
+        while (random2 != random1) {
+            random2 = Math.floor(Math.random() * size);
+        }
+        const winner2 = users[random2].user;
+        console.log(winner1, winner2);
+    }
+    */
 });
 
 // @desc Get tickets booked by user
