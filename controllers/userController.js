@@ -140,6 +140,18 @@ const bookTicket = asyncHandler(async (req, res) => {
         "_id price date dateFormat"
     );
 
+    const user = await User.findById(req.user._id);
+
+    if (!user) {
+        res.status(404);
+        throw new Error("No user found by this id");
+    }
+
+    if (user.rewardCount <= 0) {
+        res.status(400);
+        throw new Error("You have no reward count left");
+    }
+
     // Check time of booking
 
     var diff = ticket.eventDetail.dateFormat - new Date();
@@ -190,6 +202,9 @@ const bookTicket = asyncHandler(async (req, res) => {
 
     ticket.user = req.user._id;
 
+    user.rewardCount = user.rewardCount - 1;
+
+    await user.save();
     await ticket.save();
 
     res.status(200).json(ticket);
